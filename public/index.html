@@ -1,20 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>My App</title>
+
+    <title>The To-Do List Inspired by Etch-A-Sketch!</title>
+    <link href="http://fonts.googleapis.com/css?family=Merriweather+Sans|Inder" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/lib/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/app/app.css" /> 
   </head>
-
   <body>
-    <h1>Todos</h1>
-    <div class="todo_list">
+    <div class="container">
+      <h1>Not-So-Vanishing Todos</h1>
+      <p class="subtext">They'll haunt your dreams!</p>
+      <div class="tabs">
+        <a class="tab active" href="All">All</a>
+        <a class="tab" href="Categorized">Categorized</a>
+        <a class="tab" href="Edit">Edit</a>
+      </div>
+
+      <div class="content">
+        <div class="tab active" id="All"></div>
+        <div class="tab" id="Categorized"></div>
+        <div class="tab" id="Edit">
+          <textarea id="desc" rows="2" cols="50" placeholder="Enter Description..." autofocus></textarea><br />
+          <textarea id="categ" rows="1" cols="25" placeholder="Categories..."></textarea><br />
+          <button type="button" class="btn btn-success" id="addToDo">Add ToDo</button>
+        </div>
+      </div>
+
     </div>
-
-    <p>Description: <input id="description" type="text" /></p>
-    <p>Categories: <input id="categories" type="text" /></p>
-    <button id="new_todo">Create Todo</button>
-
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="javascripts/client-app.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/app/app.js"></script>
   </body>
 </html>
