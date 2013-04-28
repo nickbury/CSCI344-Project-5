@@ -67,9 +67,18 @@ var main = function () {
                 + "</div>");
             $("#" + itemNum).click(function () {
                 var toBeRemoved = $(this).attr("id");
+                var tobedeleted = $("." + toBeRemoved + " > .span10 > .description").html();
+                var del_obj = {
+                    description: tobedeleted
+                };
                 $("." + toBeRemoved).fadeOut(150, function () {
+                    $.post("todo/delete", del_obj, function (response) {
+                        console.log(response);
+                    });
+                    console.log(tobedeleted + " " + toBeRemoved);
                     $(this).remove();
                 });
+
                 totalTodos--;
             });
             itemNum++;
@@ -85,7 +94,7 @@ var main = function () {
                     alert("something is not complete");
                 } else {
                     post_object.description = desc;
-                    post_object.categories = categories.split(" ");
+                    post_object.categories = categories.split(/[\s,]+/);
                     console.log(post_object);
 
                     $.post("/todo/new", post_object, function (response) {

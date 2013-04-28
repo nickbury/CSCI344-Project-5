@@ -24,5 +24,5 @@ http.createServer(app).listen(3000, function () {
 
 app.get("/todos.json", tc.list);
 app.post("/todo/new", tc.create);
-app.post("/todos/delete", tc.destroy);
+app.post("/todo/delete", tc.destroy);
 
