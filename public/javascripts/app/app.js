@@ -9,33 +9,33 @@ var main = function () {
         renderCategorized = function () {
             //clear previous content
             $("#Categorized").children().remove();
-            //generate new content
-            var i, j, description, categoriesStr, categories;
-            for (i = 0; i < totalTodos; i++) {
-                description = $(".description:eq(" + i + ")").html();
-                categoriesStr = $(".categories:eq(" + i + ")").html();
-                categories = categoriesStr.split(" ");
-                for (j = 0; j < categories.length; j++) {
-                    if (categories[j] === undefined || categories[j] === '') {
-                        console.log("Invalid category");
-                    } else {
-                        if ($("#Categorized > .item > .span10").is("." + categories[j])) {
-                            $("." + categories[j]).append("<div class='description'>"
-                                + " &#187; " + description
-                                + "</div>");
-                        } else {
+            //generate new content using the database
+            $.getJSON("/todos.json", function (todos) {
+                //stores previous categories
+                var categoriesArray = [];
+                todos.forEach(function (todo) {
+                    todo.categories.forEach(function (category) {
+                        if (categoriesArray.indexOf(category) === -1) {
+                            console.log(category);
                             $("#Categorized").append("<div class='item row'>"
                                 + "<div class='span10 "
-                                + categories[j]
+                                + category
                                 + "'><div class='categoryTitle'>"
-                                + categories[j]
+                                + category
                                 + "</div><div class='description'>"
-                                + " &#187; " + description
+                                + " &#187; " + todo.description
                                 + "</div></div></div>");
+
+                            categoriesArray.push(category);
+                        } else {
+                            $("." + category).append("<div class='description'>"
+                                + " &#187; " + todo.description
+                                + "</div>");
                         }
-                    }
-                }
-            }
+                    });
+
+                });
+            });
 
         },
         setUpTabHandler = function (anchor) {
