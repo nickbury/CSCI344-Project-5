@@ -48,6 +48,9 @@ var main = function () {
 
                 if (target === "Categorized") {
                     renderCategorized();
+                } else if (target === "All") {
+                    $("#All").children().remove();
+                    jsonLoader();
                 }
 
                 return false;
